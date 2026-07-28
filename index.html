@@ -77,7 +77,7 @@ header.top-bar{
   padding:14px 24px; gap:16px; flex-wrap:wrap;
 }
 .logos-row{ display:flex; align-items:center; gap:22px; flex-wrap:wrap; }
-.logos-row img{ height:56px; width:auto; object-fit:contain; }
+.logos-row img{ height:72px; width:auto; object-fit:contain; }
 .project-mark{ display:flex; flex-direction:column; align-items:flex-end; text-align:right; }
 .project-mark .name{ font-family:'Aref Ruqaa', serif; font-size:1.5rem; color:var(--olive-deep); font-weight:700; }
 .project-mark .sub{ font-size:0.75rem; color:var(--ink-soft); letter-spacing:0.5px; }
@@ -248,12 +248,51 @@ main{ max-width:1200px; margin:0 auto; padding:24px; position:relative; z-index:
 .gallery-grid figcaption{ padding:10px 14px; font-size:0.85rem; color:var(--ink-soft); }
 .gallery-empty{ text-align:center; padding:60px 20px; color:var(--ink-soft); }
 
+.video-frame{
+  position:relative; width:100%; border-radius:16px; overflow:hidden;
+  box-shadow:var(--shadow); background:#111;
+}
+.video-frame video{ width:100%; max-height:520px; display:block; background:#000; }
+
 footer{ text-align:center; padding:30px; color:var(--ink-soft); font-size:0.8rem; }
 
+@media(max-width:960px){
+  main{ padding:18px; }
+  .kpi-card .num{ font-size:2.2rem; }
+}
+
+@media(max-width:820px){
+  .panel-grid{ grid-template-columns:1fr; }
+  .top-bar-inner{ padding:12px 16px; }
+  .logos-row img{ height:58px; }
+}
+
 @media(max-width:600px){
-  .logos-row img{ height:42px; }
+  .logos-row{ gap:14px; }
+  .logos-row img{ height:44px; }
+  .project-mark{ align-items:flex-start; text-align:right; }
   .project-mark .name{ font-size:1.15rem; }
+  .top-bar-inner{ flex-direction:column; align-items:flex-end; gap:10px; }
+  .main-nav-inner button{ padding:12px 12px; font-size:0.85rem; }
+  .welcome-banner{ padding:20px 16px 4px; }
+  .welcome-banner p{ font-size:0.92rem; }
+  main{ padding:14px; }
+  .kpi-grid{ grid-template-columns:repeat(2,1fr); gap:10px; }
+  .kpi-card{ padding:16px 14px; }
+  .kpi-card .num{ font-size:1.7rem; }
+  .kpi-card .label{ font-size:0.75rem; }
   .text-page{ padding:26px; }
+  .year-switch button{ padding:10px 16px; font-size:0.85rem; }
+  .section-title h2{ font-size:1.2rem; }
+  .video-frame video{ max-height:280px; }
+}
+
+@media(max-width:380px){
+  .kpi-grid{ grid-template-columns:1fr 1fr; }
+  .kpi-card .num{ font-size:1.5rem; }
+  .logos-row img{ height:38px; }
+  .text-page{ padding:18px; }
+  .text-page .kicker{ font-size:1.4rem; }
 }
 </style>
 </head>
@@ -283,7 +322,7 @@ footer{ text-align:center; padding:30px; color:var(--ink-soft); font-size:0.8rem
       <button data-view="mushrif">كلمة المشرف العام</button>
       <button data-view="shukr">شكر وتقدير</button>
       <button data-view="fikra">فكرة المشروع</button>
-      <button data-view="gallery">الصور</button>
+      <button data-view="gallery">المحتوى المرئي</button>
     </div>
   </nav>
 </header>
@@ -348,12 +387,34 @@ footer{ text-align:center; padding:30px; color:var(--ink-soft); font-size:0.8rem
           <p>حيث يقع الجامع في قلب الكثافة السكنية للجالية.</p>
         </div>
       </div>
+
+      <div class="video-block">
+        <h3 style="color:var(--olive-deep); margin:30px 0 14px; font-family:'Tajawal'; font-weight:700;">شاهد فكرة المشروع</h3>
+        <div class="video-frame">
+          <video controls preload="metadata" poster="">
+            <source src="media/فكرة-المشروع.mp4" type="video/mp4">
+            متصفحك لا يدعم عرض الفيديو مباشرة.
+          </video>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- ===================== الصور ===================== -->
+  <!-- ===================== المحتوى المرئي ===================== -->
   <section class="view" id="view-gallery">
-    <div class="section-title"><h2>معرض الصور</h2><div class="rule"></div></div>
+    <div class="section-title"><h2>المحتوى المرئي</h2><div class="rule"></div></div>
+
+    <div class="video-block" style="margin-bottom:34px;">
+      <h3 style="color:var(--olive-deep); margin-bottom:14px; font-family:'Tajawal'; font-weight:700;">فيديو مشروع علّم أعجميًا</h3>
+      <div class="video-frame">
+        <video controls preload="metadata">
+          <source src="media/فكرة-المشروع.mp4" type="video/mp4">
+          متصفحك لا يدعم عرض الفيديو مباشرة.
+        </video>
+      </div>
+    </div>
+
+    <h3 style="color:var(--olive-deep); margin-bottom:14px; font-family:'Tajawal'; font-weight:700;">معرض الصور</h3>
     <div id="galleryBody"></div>
   </section>
 
@@ -434,8 +495,8 @@ const YEARS_DATA = {
           { label: "تخرّجوا من القاعدة النورانية", value: 11 },
           { label: "أتموا حفظ كتاب الله", value: 1 }
         ],
-        completion: null, // بانتظار تحديد طريقة الحساب من نواف
-        attendance: null  // بانتظار تحديد طريقة الحساب من نواف
+        completion: 90,
+        attendance: 99
       },
       q3: null,
       q4: null
